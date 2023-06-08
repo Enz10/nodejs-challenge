@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2019"],
+    "module": "commonjs",
+    "target": "ES2019",
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "incremental": true,
+    "sourceMap": true,
+    "declaration": true,
+    "allowJs": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "noUncheckedIndexedAccess": true,
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  },
+  "ts-node": {
+    "files": true
+  }
+}
