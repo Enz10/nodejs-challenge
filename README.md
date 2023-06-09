@@ -79,4 +79,6 @@ Include an endpoint for refreshing the JWT access token.
     "nationality": "American"
   }
 
+5- Here you can find the model: https://imgur.com/a/tSjh7Y1
+
 ```

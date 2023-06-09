@@ -3,6 +3,7 @@ import {PassportStrategy} from '@nestjs/passport'
 import {InjectRepository} from '@nestjs/typeorm'
 import {Strategy, ExtractJwt} from 'passport-jwt'
 import {Repository} from 'typeorm'
+import 'dotenv/config'
 
 import {User} from '~/modules/user/entities/user.entity'
 
@@ -16,7 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'supersecretsecretdonotsharethiswithanyone!!!'
+      secretOrKey: process.env.JWT_SECRET
     })
   }
 

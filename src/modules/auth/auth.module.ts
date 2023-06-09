@@ -1,5 +1,3 @@
-import {env} from 'process'
-
 import {Module} from '@nestjs/common'
 import {JwtModule} from '@nestjs/jwt'
 import {PassportModule} from '@nestjs/passport'
@@ -14,7 +12,7 @@ import {UsersModule} from '../user/user.module'
     UsersModule,
     PassportModule.register({defaultStrategy: 'jwt'}),
     JwtModule.register({
-      secret: env.JWT_SECRET || 'supersecretsecretdonotsharethiswithanyone!!!',
+      secret: process.env.JWT_SECRET,
       signOptions: {expiresIn: 1800}
     })
   ],
