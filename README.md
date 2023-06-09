@@ -37,37 +37,46 @@ $ npm install
 ```bash
 # development
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+## Functionality
 
 ```bash
-# unit tests
-$ npm run test
+This API uses http://localhost:3000
 
-# e2e tests
-$ npm run test:e2e
+1- Endpoints for authentication using JWT.
+Include an endpoint for refreshing the JWT access token.
 
-# test coverage
-$ npm run test:cov
+- The following endpoint /auth/login must be used with this body request:
+  {
+      "username": "enzo",
+      "password": "baldoceda123"
+  }
+
+  Then use the token generated as a header into the different endpoints, like this:
+
+  Authorization Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVuem8iLCJzdWIiOjEsImlhdCI6MTY4NjI4Njk2NCwiZXhwIjoxNjg2Mjg4NzY0fQ.28IoGL1IoT3LDYP2G6ZBxsMLlGcHIsu1TDC6nuURe9g
+
+  For token refresh use this endpoint /auth/refresh and the previous token as a Authorization header like the previous step.
+
+2- Endpoint for retrieving movies. It should be allowed to filter and sort by some field.
+
+  You can filter by any field of movies, in this example is filtering by name 'Inception' and ordering by rating ascendant
+  /entertainment/movies?where[name]=Inception&order[rating]=ASC
+
+3- Endpoint for retrieving the information (director included) of a specific episode of a TV Show
+
+  This endpoint retrieves the information /entertainment/movies
+
+4- Endpoint for adding a new object (it could be for any entity you like).
+
+  I chose the Director entity, this is the endpoint which creater a new one: /entertainment/directors
+
+  Body example:
+  {
+    "name": "Tarantino",
+    "birthdate": "1980-04-23",
+    "nationality": "American"
+  }
+
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).

@@ -13,7 +13,7 @@ export const TypeOrmConfig = z
     password: data.POSTGRES_DB_PASSWORD,
     database: data.POSTGRES_DB_DATABASE,
     host: data.POSTGRES_DB_HOST,
-    port: Number(data.POSTGRES_DB_PORT),
+    port: Number(data.POSTGRES_DB_PORT)
   }))
 
 export type TypeOrmConfig = z.infer<typeof TypeOrmConfig>

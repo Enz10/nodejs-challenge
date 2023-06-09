@@ -3,12 +3,14 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  OneToMany
+  OneToMany,
+  JoinColumn
 } from 'typeorm'
-import {TVShow} from './tvshow.entity'
-import {Episode} from './episode.entity'
 
-@Entity()
+import {Episode} from './episode.entity'
+import {TVShow} from './tvshow.entity'
+
+@Entity('season')
 export class Season {
   @PrimaryGeneratedColumn()
   id: number
@@ -16,14 +18,15 @@ export class Season {
   @Column()
   season_number: number
 
-  @Column()
-  premiere_date: Date
+  @Column({type: 'date'})
+  start_date: Date
 
-  @Column()
-  number_of_episodes: number
+  @Column({type: 'date'})
+  end_date: Date
 
-  @ManyToOne(() => TVShow, tvshow => tvshow.seasons)
-  tvshow: TVShow
+  @ManyToOne(() => TVShow, tvShow => tvShow.seasons)
+  @JoinColumn({name: 'tv_show_id'})
+  tvShow: TVShow
 
   @OneToMany(() => Episode, episode => episode.season)
   episodes: Episode[]

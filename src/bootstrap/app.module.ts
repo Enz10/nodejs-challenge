@@ -1,8 +1,12 @@
 import {env} from 'process'
 
 import {Module} from '@nestjs/common'
-import {EnvModule} from '~/lib/env'
 import {TypeOrmModule} from '@nestjs/typeorm'
+
+import {AuthModule} from '~/modules/auth/auth.module'
+import {EntertainmentModule} from '~/modules/entertainment/entertainment.module'
+import {UsersModule} from '~/modules/user/user.module'
+
 import {TypeOrmConfig} from './config/typeorm-config'
 
 @Module({
@@ -12,14 +16,6 @@ import {TypeOrmConfig} from './config/typeorm-config'
         const {username, password, host, database, port} =
           await TypeOrmConfig.parseAsync(env)
 
-        console.log('DB config:', {
-          username,
-          password,
-          host,
-          database,
-          port
-        })
-
         return {
           type: 'postgres',
           host,
@@ -28,13 +24,14 @@ import {TypeOrmConfig} from './config/typeorm-config'
           password,
           database,
           entities: ['**/*.entity.js'],
-          synchronize: true,
           logger: 'debug',
           logging: 'all'
         }
       }
     }),
-    EnvModule.forRoot()
+    EntertainmentModule,
+    AuthModule,
+    UsersModule
   ],
   controllers: [],
   providers: []

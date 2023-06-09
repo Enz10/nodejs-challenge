@@ -1,30 +1,29 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  ManyToMany
-} from 'typeorm'
-import {Movie} from './movie.entity'
-import {Episode} from './episode.entity'
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm'
 
-@Entity()
+import {Episode} from './episode.entity'
+import {Movie} from './movie.entity'
+import {TVShow} from './tvshow.entity'
+
+@Entity('director')
 export class Director {
   @PrimaryGeneratedColumn()
   id: number
 
   @Column()
-  first_name: string
+  name: string
+
+  @Column({type: 'date'})
+  birthdate: Date
 
   @Column()
-  last_name: string
-
-  @Column()
-  date_of_birth: Date
+  nationality: string
 
   @OneToMany(() => Movie, movie => movie.director)
   movies: Movie[]
 
-  @ManyToMany(() => Episode, episode => episode.directors)
+  @OneToMany(() => Episode, episode => episode.director)
   episodes: Episode[]
+
+  @OneToMany(() => TVShow, tvShow => tvShow.director)
+  tvShows: TVShow[]
 }

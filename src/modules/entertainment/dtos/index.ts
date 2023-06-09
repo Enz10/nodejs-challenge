@@ -1,0 +1,5 @@
+export * from './actor.dto'
+export * from './movie.dto'
+export * from './director.dto'
+export * from './tvshow.dto'
+export * from './create-director.dto'

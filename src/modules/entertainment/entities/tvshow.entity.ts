@@ -4,32 +4,43 @@ import {
   Column,
   OneToMany,
   ManyToMany,
-  JoinTable
+  JoinTable,
+  ManyToOne,
+  JoinColumn
 } from 'typeorm'
-import {Season} from './season.entity'
-import {Actor} from './actor.entity'
 
-@Entity()
+import {Actor} from './actor.entity'
+import {Director} from './director.entity'
+import {Season} from './season.entity'
+
+@Entity('tvshow')
 export class TVShow {
   @PrimaryGeneratedColumn()
   id: number
 
   @Column()
-  title: string
+  name: string
 
   @Column()
   genre: string
 
-  @Column()
-  premiere_date: Date
+  @Column({type: 'date'})
+  start_date: Date
 
-  @Column()
-  number_of_seasons: number
+  @Column({type: 'date'})
+  end_date: Date
 
-  @OneToMany(() => Season, season => season.tvshow)
+  @Column({type: 'decimal', precision: 2, scale: 1})
+  rating: number
+
+  @OneToMany(() => Season, season => season.tvShow, {eager: true})
   seasons: Season[]
 
-  @ManyToMany(() => Actor, actor => actor.tvshows)
-  @JoinTable()
+  @ManyToMany(() => Actor, actor => actor.tvShows)
+  @JoinTable({name: 'tvshow_actor'})
   actors: Actor[]
+
+  @ManyToOne(() => Director, director => director.tvShows)
+  @JoinColumn({name: 'director_id'})
+  director: Director
 }

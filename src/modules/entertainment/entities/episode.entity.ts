@@ -2,14 +2,16 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
   ManyToMany,
+  ManyToOne,
   JoinTable
 } from 'typeorm'
-import {Season} from './season.entity'
-import {Director} from './director.entity'
 
-@Entity()
+import {Actor} from './actor.entity'
+import {Director} from './director.entity'
+import {Season} from './season.entity'
+
+@Entity('episode')
 export class Episode {
   @PrimaryGeneratedColumn()
   id: number
@@ -18,15 +20,21 @@ export class Episode {
   episode_number: number
 
   @Column()
-  title: string
+  name: string
 
-  @Column()
-  duration_in_minutes: number
+  @Column({type: 'date'})
+  air_date: Date
+
+  @Column({type: 'decimal', precision: 2, scale: 1})
+  rating: number
 
   @ManyToOne(() => Season, season => season.episodes)
   season: Season
 
-  @ManyToMany(() => Director, director => director.episodes)
-  @JoinTable()
-  directors: Director[]
+  @ManyToOne(() => Director, director => director.episodes)
+  director: Director
+
+  @ManyToMany(() => Actor, actor => actor.episodes)
+  @JoinTable({name: 'episode_actor'})
+  actors: Actor[]
 }
